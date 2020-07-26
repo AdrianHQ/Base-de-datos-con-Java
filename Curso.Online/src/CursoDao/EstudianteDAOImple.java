@@ -108,5 +108,33 @@ public class EstudianteDAOImple implements EstudianteDAO{
         }
         
     }
+
+    @Override
+    public List<cursos> getCursosPorEstudiante(int estudianteId) {
+        
+        String query = "SELECT cursos.id, nombre\n" +
+"	FROM public.cursos\n" +
+"	inner join cursos_estudiantes on cursos.id = cursos_estudiantes.curso_id\n" +
+"	where estudiante_id=?;";
+        
+        List<cursos> curso = new ArrayList<cursos>();
+        
+        Connection conn ;     
+            try {
+            conn = DriverManager.getConnection(util.URL, util.USUARIO, util.CLAVE);
+            PreparedStatement sentencia = conn.prepareStatement(query);
+            sentencia.setInt(1,estudianteId);
+            ResultSet rset=sentencia.executeQuery();
+             while (rset.next()){
+                cursos Cursos = new cursos (rset.getInt(1), rset.getString(2));
+                 curso.add(Cursos);
+            }
+  
+            
+    }   catch (SQLException ex) {
+            Logger.getLogger(CursoDAOImple.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return curso;
+    }
     
 }

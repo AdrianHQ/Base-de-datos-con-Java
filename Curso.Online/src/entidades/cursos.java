@@ -5,10 +5,14 @@
  */
 package entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class cursos {
     
     private int id;
     private String nombre;
+    private List<Estudiante> estudiantes = new ArrayList<>(); 
 
     public cursos (){}
     
@@ -17,8 +21,6 @@ public class cursos {
         this.nombre = nombre;
     }
 
-    
-    
     public int getId() {
         return id;
     }
@@ -35,6 +37,15 @@ public class cursos {
         this.nombre = nombre;
     }
 
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public void setEstudiantes(List<Estudiante> estudiantes) {
+        this.estudiantes = estudiantes;
+    }
+
+    
     @Override
     public String toString() {
         return "cursos{" + "id=" + id + ", nombre=" + nombre + '}';

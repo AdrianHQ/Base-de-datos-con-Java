@@ -5,6 +5,9 @@
  */
 package entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Admin
@@ -14,6 +17,7 @@ public class Estudiante {
     private String nombres;
     private String apellidos;
     private String correo;
+    private List<cursos> curso = new ArrayList<>(); 
     
     public Estudiante() {}
 
@@ -57,6 +61,15 @@ public class Estudiante {
         this.correo = correo;
     }
 
+    public List<cursos> getCurso() {
+        return curso;
+    }
+
+    public void setCurso(List<cursos> curso) {
+        this.curso = curso;
+    }
+
+    
     @Override
     public String toString() {
         return "Estudiante{" + "id=" + id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", correo=" + correo + '}';

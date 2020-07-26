@@ -3,6 +3,7 @@ package CursoDao;
 
 import Util.util;
 import curso.online.CursoOnline;
+import entidades.Estudiante;
 import entidades.cursos;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -98,6 +99,35 @@ public class CursoDAOImple implements CursoDAO{
     }   catch (SQLException ex) {
             Logger.getLogger(CursoDAOImple.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+    }
+
+    @Override
+    public List<Estudiante> getEstudiantePorCurso(int cursoId) {
+          String query = "SELECT estudiantes.id, nombres, apellidos, correo\n" +
+"	FROM public.estudiantes\n" +
+"	inner join cursos_estudiantes on estudiantes.id = cursos_estudiantes.estudiante_id\n" +
+"	where cursos_estudiantes.curso_id=?;";
+        
+        List<Estudiante> estudiantes = new ArrayList<Estudiante>();
+        
+        Connection conn ;     
+            try {
+            conn = DriverManager.getConnection(util.URL, util.USUARIO, util.CLAVE);
+            PreparedStatement sentencia = conn.prepareStatement(query);
+            sentencia.setInt(1,cursoId);
+            ResultSet rset=sentencia.executeQuery();
+             while (rset.next()){
+                Estudiante estudiante = new Estudiante (rset.getInt(1), rset.getString(2),rset.getString(3),rset.getString(4));
+                 estudiantes.add(estudiante);
+            }
+            
+            
+    }   catch (SQLException ex) {
+            Logger.getLogger(CursoDAOImple.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return estudiantes;
+        
         
     }
     

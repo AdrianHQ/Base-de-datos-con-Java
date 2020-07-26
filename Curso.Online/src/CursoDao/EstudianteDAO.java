@@ -6,6 +6,7 @@
 package CursoDao;
 
 import entidades.Estudiante;
+import entidades.cursos;
 import java.util.List;
 
 /**
@@ -14,9 +15,10 @@ import java.util.List;
  */
 public interface EstudianteDAO {
     
-    List <Estudiante> getEstudiante();
+    //List <Estudiante> getEstudiante();
     void ingresar(Estudiante estudiantes);
     void actualizar(Estudiante estudiantes);
     void eliminar(int id);
-    
+    List<cursos> getCursosPorEstudiante(int estudianteId);
+    List<Estudiante> getEstudiante();
 }
